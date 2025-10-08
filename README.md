@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # AI-Backend: Fashion MNIST Classification
 
 ## Deskripsi
@@ -48,22 +47,6 @@ Terdapat dua opsi pengetesan model: otomatis dengan dataset resmi dan manual den
    ```
 
 2. **Buat virtual environment (opsional)**
-=======
-# AI-Backend: Fashion MNIST Model Training
-
-## Deskripsi
-Project ini digunakan untuk melakukan training model klasifikasi gambar Fashion MNIST menggunakan TensorFlow.
-
-## Instalasi
-
-1. **Clone repository**
-   ```bash
-   git clone https://github.com/username/AI-Backend.git
-   cd AI-Backend
-   ```
-
-2. **Buat virtual environment (opsional tapi direkomendasikan)**
->>>>>>> ecc838c521c93d92b81a2cf96c320031e7516669
    ```bash
    python3 -m venv venv
    source venv/bin/activate
@@ -71,7 +54,6 @@ Project ini digunakan untuk melakukan training model klasifikasi gambar Fashion 
 
 3. **Install library yang dibutuhkan**
    ```bash
-<<<<<<< HEAD
    pip install tensorflow pillow matplotlib numpy
    ```
 
@@ -121,18 +103,3 @@ coverage run test_model.py
 
 ## Lisensi
 Presented by Fathih Apriandi
-=======
-   pip install tensorflow
-   ```
-
-## Menjalankan Training
-
-Jalankan script berikut untuk memulai training model:
-```bash
-python train_fashion_mnist_model.py
-```
-
-## Catatan
-- Pastikan Python versi 3.7 atau lebih baru.
-- Untuk GPU support, install `tensorflow-gpu` sesuai dokumentasi TensorFlow.
->>>>>>> ecc838c521c93d92b81a2cf96c320031e7516669
