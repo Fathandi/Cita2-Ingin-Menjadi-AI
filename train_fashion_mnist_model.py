@@ -11,7 +11,11 @@ x_train, x_test = x_train / 255.0, x_test / 255.0
 model = tf.keras.models.Sequential([
     tf.keras.layers.Flatten(input_shape=(28, 28)),
     tf.keras.layers.Dense(512, activation=tf.nn.relu),
+<<<<<<< HEAD
     tf.keras.layers.Dense(10, activation='softmax')
+=======
+    tf.keras.layers.Dense(10, activation=tf.nn.softmax)
+>>>>>>> ecc838c521c93d92b81a2cf96c320031e7516669
 ])
 
 # Compile the model
@@ -23,4 +27,7 @@ model.compile(
 
 # Train the model
 model.fit(x_train, y_train, epochs=10)
+<<<<<<< HEAD
 model.save('fashion_mnist_model.keras')
+=======
+>>>>>>> ecc838c521c93d92b81a2cf96c320031e7516669

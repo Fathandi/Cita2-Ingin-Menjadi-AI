@@ -40,8 +40,12 @@ checkpoints/
 *.db
 
 # System files
+<<<<<<< HEAD
 Thumbs.db
 
 # Ignore test-image and result folders
 test-image/
 result/
+=======
+Thumbs.db
+>>>>>>> ecc838c521c93d92b81a2cf96c320031e7516669

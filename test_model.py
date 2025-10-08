@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 import unittest
 import tensorflow as tf
 
 # Ganti dengan nama file model yang kamu simpan
 MODEL_PATH = 'fashion_mnist_model.keras'
+=======
+# python
+
+import unittest
+import tensorflow as tf
+
+from train_fashion_mnist_model import model
+>>>>>>> ecc838c521c93d92b81a2cf96c320031e7516669
 
 class TestFashionMNISTModel(unittest.TestCase):
     @classmethod
@@ -11,17 +20,27 @@ class TestFashionMNISTModel(unittest.TestCase):
         mnist = tf.keras.datasets.fashion_mnist
         (_, _), (cls.x_test, cls.y_test) = mnist.load_data()
         cls.x_test = cls.x_test / 255.0
+<<<<<<< HEAD
         # Load trained model dari file
         cls.model = tf.keras.models.load_model(MODEL_PATH)
 
     def test_model_evaluate(self):
         loss, acc = self.model.evaluate(self.x_test, self.y_test, verbose=0)
+=======
+
+    def test_model_evaluate(self):
+        loss, acc = model.evaluate(self.x_test, self.y_test, verbose=0)
+>>>>>>> ecc838c521c93d92b81a2cf96c320031e7516669
         self.assertGreaterEqual(acc, 0.0)
         self.assertLessEqual(acc, 1.0)
         self.assertGreaterEqual(loss, 0.0)
 
     def test_model_predict_shape(self):
+<<<<<<< HEAD
         preds = self.model.predict(self.x_test[:10])
+=======
+        preds = model.predict(self.x_test[:10])
+>>>>>>> ecc838c521c93d92b81a2cf96c320031e7516669
         self.assertEqual(preds.shape, (10, 10))
         # Each prediction should sum to 1 (softmax)
         for row in preds:
