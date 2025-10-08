@@ -43,7 +43,6 @@ Terdapat dua opsi pengetesan model: otomatis dengan dataset resmi dan manual den
 1. **Clone repository**
    ```bash
    git clone https://github.com/Fathandi/Cita2-Ingin-Menjadi-AI.git
-   cd AI-Backend
    ```
 
 2. **Buat virtual environment (opsional)**
