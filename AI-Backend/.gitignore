@@ -1,0 +1,62 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.python-version
+
+# VS Code settings
+.vscode/
+
+# MacOS files
+.DS_Store
+
+# Python egg metadata
+*.egg-info/
+dist/
+build/
+
+# TensorFlow model checkpoints
+checkpoints/
+*.h5
+*.ckpt
+*.pb
+
+# Logs
+*.log
+
+# Data files
+*.csv
+*.tsv
+*.dat
+*.db
+
+# System files
+Thumbs.db
+
+# Ignore test-image and result folders
+test-image/
+result/
+
+# Ignore any other files or directories you want to exclude
+fashion_mnist_model.keras
+.coverage
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+.coverage.
+hypothesis/
+.pyre/
+.mypy_cache/
+.dmypy.json
+.pytype/
+.pyre/

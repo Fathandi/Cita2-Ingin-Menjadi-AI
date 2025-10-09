@@ -1,0 +1,81 @@
+graph TD
+    Start([Mulai Program]) --> Choice{Pilih Jalur Eksekusi}
+    
+    %% Jalur 1: Download Sample Images
+    Choice -->|1. Download Sample| DL1[download_image.py]
+    DL1 --> DL2[Load Fashion MNIST Dataset<br/>60k training + 10k testing]
+    DL2 --> DL3[Gabungkan semua data<br/>Total: 70k gambar]
+    DL3 --> DL4[Pilih 100 gambar acak<br/>menggunakan random.sample]
+    DL4 --> DL5[Konversi setiap gambar<br/>dari numpy array ke PIL Image]
+    DL5 --> DL6[Simpan ke folder test-image/<br/>format: sample_1.png - sample_100.png]
+    DL6 --> EndDL([Selesai: 100 gambar tersimpan])
+    
+    %% Jalur 2: Training Model
+    Choice -->|2. Training Model| TR1[train_fashion_mnist_model.py]
+    TR1 --> TR2[Load Fashion MNIST Dataset<br/>x_train, y_train, x_test, y_test]
+    TR2 --> TR3[Normalisasi Data<br/>Pixel values / 255.0]
+    TR3 --> TR4[Bangun Arsitektur Model:<br/>- Flatten Layer 28x28<br/>- Dense 512 neurons ReLU<br/>- Dense 10 neurons Softmax]
+    TR4 --> TR5[Compile Model:<br/>- Optimizer: Adam<br/>- Loss: Sparse Categorical Crossentropy<br/>- Metrics: Accuracy]
+    TR5 --> TR6[Training Model<br/>10 epochs pada 60k data training]
+    TR6 --> TR7{Akurasi > 85%?}
+    TR7 -->|Ya| TR8[Simpan Model<br/>fashion_mnist_model.keras]
+    TR7 -->|Tidak| TR6
+    TR8 --> EndTR([Selesai: Model tersimpan])
+    
+    %% Jalur 3: Unit Testing
+    Choice -->|3. Unit Testing| TS1[test_model.py]
+    TS1 --> TS2[Load Model<br/>fashion_mnist_model.keras]
+    TS2 --> TS3[Load Test Dataset<br/>10k gambar test]
+    TS3 --> TS4[Normalisasi Test Data<br/>Pixel values / 255.0]
+    TS4 --> TS5[Test 1: Model Evaluate<br/>Hitung accuracy & loss]
+    TS5 --> TS6{Accuracy valid?<br/>0 ≤ acc ≤ 1}
+    TS6 -->|Ya| TS7[Test 2: Predict Shape<br/>Prediksi 10 gambar pertama]
+    TS6 -->|Tidak| TestFail([FAIL: Model Error])
+    TS7 --> TS8{Output shape = 10x10?}
+    TS8 -->|Ya| TS9{Setiap row sum = 1?<br/>Softmax validation}
+    TS8 -->|Tidak| TestFail
+    TS9 -->|Ya| TS10{Semua probabilitas<br/>0 ≤ p ≤ 1?}
+    TS9 -->|Tidak| TestFail
+    TS10 -->|Ya| TestPass([PASS: All Tests])
+    TS10 -->|Tidak| TestFail
+    
+    %% Jalur 4: Prediksi Custom
+    Choice -->|4. Prediksi Custom| PR1[predict_custom_image.py]
+    PR1 --> PR2[Load Model<br/>fashion_mnist_model.keras]
+    PR2 --> PR3[Bersihkan folder result/<br/>hapus jika sudah ada]
+    PR3 --> PR4[Buat 10 subfolder<br/>sesuai label Fashion MNIST]
+    PR4 --> PR5[Inisialisasi counter<br/>untuk setiap label = 0]
+    PR5 --> PR6[Scan folder test-image/<br/>cari file .png, .jpg, .jpeg]
+    PR6 --> PR7{Ada gambar<br/>berikutnya?}
+    
+    PR7 -->|Ya| PR8[Baca & Konversi Gambar:<br/>- Convert ke Grayscale<br/>- Resize ke 28x28]
+    PR8 --> PR9[Normalisasi<br/>Pixel values / 255.0]
+    PR9 --> PR10[Reshape untuk Model<br/>shape: 1, 28, 28]
+    PR10 --> PR11[Prediksi dengan Model<br/>dapatkan probabilitas 10 kelas]
+    PR11 --> PR12[Ambil index maksimal<br/>argmax prediction]
+    PR12 --> PR13[Konversi index ke label<br/>ex: 7 → Sneaker]
+    PR13 --> PR14[Hitung confidence<br/>max probability × 100%]
+    PR14 --> PR15[Tampilkan hasil di terminal<br/>filename: label confidence%]
+    PR15 --> PR16[Simpan gambar ke<br/>result/label/filename]
+    PR16 --> PR17[Tambahkan counter<br/>prediction_count per label]
+    PR17 --> PR7
+    
+    PR7 -->|Tidak| PR18[Buat Visualisasi:<br/>Bar chart distribusi prediksi]
+    PR18 --> PR19[Tambahkan label angka<br/>di atas setiap bar]
+    PR19 --> PR20[Tampilkan grafik<br/>dengan matplotlib.pyplot.show]
+    PR20 --> EndPR([Selesai: Semua gambar terklasifikasi])
+    
+    %% Styling
+    classDef downloadClass fill:#e1f5ff,stroke:#01579b,stroke-width:2px
+    classDef trainClass fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef testClass fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    classDef predictClass fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px
+    classDef endClass fill:#ffebee,stroke:#b71c1c,stroke-width:3px
+    classDef decisionClass fill:#fff3e0,stroke:#e65100,stroke-width:2px
+    
+    class DL1,DL2,DL3,DL4,DL5,DL6 downloadClass
+    class TR1,TR2,TR3,TR4,TR5,TR6,TR7,TR8 trainClass
+    class TS1,TS2,TS3,TS4,TS5,TS6,TS7,TS8,TS9,TS10 testClass
+    class PR1,PR2,PR3,PR4,PR5,PR6,PR7,PR8,PR9,PR10,PR11,PR12,PR13,PR14,PR15,PR16,PR17,PR18,PR19,PR20 predictClass
+    class EndDL,EndTR,TestPass,TestFail,EndPR endClass
+    class Choice,TR7,TS6,TS8,TS9,TS10,PR7 decisionClass
