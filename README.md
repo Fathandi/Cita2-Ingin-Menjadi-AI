@@ -70,8 +70,6 @@ AI-Backend/
 
 ---
 
----
-
 ## Alur Kerja Program
 
 ### **Tahap 1: Persiapan Data Sample**
